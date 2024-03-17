@@ -13,8 +13,13 @@ import Meting from '@/components/music/Meting.vue'
 
 import Douban from '@/components/douban/Douban.vue'
 import Neodb from '@/components/douban/Neodb.vue'
-import Bili from '@/components/bili/Bili.vue'
+
 import Md from '@/components/md/Md.vue'
+
+import Bili from '@/components/bili/Bili.vue'
+import IndexeddbList from '@/components/bili/IndexeddbList.vue'
+import MybatisList from '@/components/bili/MybatisList.vue'
+import MongodbList from '@/components/bili/MongodbList.vue'
 
 // import Tabs from '@/layout/Tabs.vue'
 
@@ -25,6 +30,20 @@ const router = createRouter({
     {
       path: '/bili',
       component: Bili,
+      children: [
+        {
+          path:'indexed',
+          component:IndexeddbList
+        },
+        {
+          path:'mybatis',
+          component:MybatisList
+        },
+        {
+          path:'mongo',
+          component:MongodbList
+        }
+      ]
     },
     {
       path: '/meting',

@@ -1,11 +1,9 @@
 <template>
-    <div class="app-container">
-        <!-- <MybatisList/> -->
-        <IndexeddbList/>
-    </div>
-</template>
+    <RouterLink to="/bili/indexed">IndexeddbList</RouterLink>&nbsp;&nbsp;
+    <RouterLink to="/bili/mybatis">MybatisList</RouterLink>&nbsp;&nbsp;
+    <RouterLink to="/bili/mongo">MongodbList</RouterLink>&nbsp;&nbsp;
+    <br/>
+    <br/>
 
-<script lang="ts" setup>
-import MybatisList from '@/components/bili/MybatisList.vue'
-import IndexeddbList from '@/components/bili/IndexeddbList.vue'
-</script>
+    <RouterView></RouterView>
+</template>

@@ -5,7 +5,7 @@
     </div>
 </template>
 
-<script lang="ts" setup>
+<script setup>
 // import MybatisList from '@/components/bili/MybatisList.vue'
 import IndexeddbList from '@/components/douban/IndexeddbList.vue'
 </script>

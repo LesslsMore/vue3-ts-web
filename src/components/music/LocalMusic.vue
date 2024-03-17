@@ -5,7 +5,7 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup>
 import Api from '@/api/music/music'
 // import APlayer from "APlayer"; // 引入音乐插件
 // import "APlayer/dist/APlayer.min.css"; // 引入音乐插件的样式

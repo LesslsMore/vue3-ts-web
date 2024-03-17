@@ -27,10 +27,9 @@
 
 </template>
 
-<script lang="ts" setup>
+<script setup>
 
 import { reactive, ref } from 'vue'
-import type { FormInstance, FormRules } from 'element-plus'
 
 import api from '@/api/bili/bili'
 
@@ -79,20 +78,20 @@ const submitForm = () => {
     fetchData()
 }
 
-const resetForm = (formEl: FormInstance | undefined) => {
-    if (!formEl) return
-    formEl.resetFields()
-}
+// const resetForm = (formEl: FormInstance | undefined) => {
+//     if (!formEl) return
+//     formEl.resetFields()
+// }
 
 
 const small = ref(false)
 const background = ref(false)
 const disabled = ref(false)
 
-const handleSizeChange = (val: number) => {
+const handleSizeChange = (val) => {
     console.log(`${val} items per page`)
 }
-const handleCurrentChange = (val: number) => {
+const handleCurrentChange = (val) => {
     console.log(`current page: ${val}`)
 }
 

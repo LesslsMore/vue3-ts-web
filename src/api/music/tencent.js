@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-async function tencent(id: string) {
+async function tencent(id) {
     let config = {
         method: 'get',
         maxBodyLength: Infinity,

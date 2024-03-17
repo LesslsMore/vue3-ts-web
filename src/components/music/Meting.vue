@@ -23,7 +23,7 @@
 
 
 
-<script lang="ts" setup>
+<script setup>
 import netease from '@/api/music/netease'
 // import tencent from '@/api/music/tencent'
 

@@ -5,10 +5,10 @@
     </div>
 </template>
 
-<script setup lang="ts" name="Meting">
+<script setup>
 // import APlayer from "APlayer"; // 引入音乐插件
 // import "APlayer/dist/APlayer.min.css"; // 引入音乐插件的样式
-import { onMounted, watch, toRefs, defineProps } from "vue";
+import { onMounted, watch, toRefs} from "vue";
 
 
 

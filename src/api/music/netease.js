@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-async function netease(id:string) {
+async function netease(id) {
     let config = {
         method: 'get',
         maxBodyLength: Infinity,

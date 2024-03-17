@@ -33,10 +33,9 @@
 
 </template>
 
-<script lang="ts" setup>
+<script setup>
 
 import { reactive, ref } from 'vue'
-import type { FormInstance, FormRules } from 'element-plus'
 import { Delete, Edit, Search, Refresh, Share, Upload } from '@element-plus/icons-vue'
 
 import api from '@/api/bili/bili'
@@ -220,12 +219,12 @@ const small = ref(false)
 const background = ref(false)
 const disabled = ref(false)
 
-const handleSizeChange = (val: number) => {
+const handleSizeChange = (val) => {
     console.log(`${val} items per page`)
 
     fetchData()
 }
-const handleCurrentChange = (val: number) => {
+const handleCurrentChange = (val) => {
     console.log(`current page: ${val}`)
 
     fetchData()
