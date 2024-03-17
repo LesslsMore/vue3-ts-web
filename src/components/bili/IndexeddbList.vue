@@ -1,6 +1,8 @@
 <template>
     <input ref="excel-upload-input" class="excel-upload-input" type="file" accept=".xlsx, .xls" @change="handleClick">
 
+    <el-button type="primary" :icon="Download" size="mini" @click="exportData()">导出</el-button>
+
     <el-form ref="searchObjRef" style="max-width: 600px" :model="searchObj" status-icon :rules="rules"
         label-width="auto" class="demo-ruleForm">
         <el-form-item label="分段视频名称">
@@ -10,7 +12,10 @@
             <!-- <el-button type="primary" @click="submitForm(searchObjRef)">Submit</el-button>
             <el-button @click="resetForm(searchObjRef)">Reset</el-button> -->
             <el-button type="primary" :icon="Search" size="mini" @click="fetchData()">搜索</el-button>
+
             <el-button :icon="Refresh" size="mini" @click="resetData">重置</el-button>
+
+
 
         </el-form-item>
     </el-form>
@@ -36,7 +41,8 @@
 <script setup>
 
 import { reactive, ref } from 'vue'
-import { Delete, Edit, Search, Refresh, Share, Upload } from '@element-plus/icons-vue'
+import { Delete, Edit, Search, Refresh, Share, Upload, Download } from '@element-plus/icons-vue'
+import { saveAs } from 'file-saver'
 
 import api from '@/api/bili/bili'
 
@@ -93,12 +99,29 @@ async function handleClick(e) {
     // this.import(rawFile)
 }
 
+function exportData() {
+    console.log('exportData...')
+
+    let data = {
+        test:'t',
+    }
+
+    // let link = document.createElement('a')
+    // link.download = 'config.json'
+    // link.href = 'data:text/plain,' + JSON.stringify(data)
+    // link.click()
+
+    var blob = new Blob([JSON.stringify(data)], {type: "text/plain;charset=utf-8"});
+
+    // var blob = new Blob(["Hello, world!"],{ type: "application/vnd.ms-excel" })
+
+    saveAs(blob, "t.txt");
+
+    
+}
+
 async function upload(file) {
     try {
-        // console.log(dbFile)
-
-        // modal.open('正在恢复数据库。请不要关闭当前窗口');
-        // let storage = new Storage();
         let buffer = new Uint8Array(await file.arrayBuffer());
 
         const workbook = new ExcelJS.Workbook();

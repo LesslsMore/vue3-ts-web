@@ -17,6 +17,7 @@
     "dexie": "^3.2.6",
     "element-plus": "^2.6.1",
     "exceljs": "^4.4.0",
+    "file-saver": "^2.0.5",
     "highlight.js": "^9.15.6",
     "lodash.throttle": "^4.1.1",
     "markdown-it": "^8.4.2",
