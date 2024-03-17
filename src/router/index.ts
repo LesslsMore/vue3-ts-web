@@ -8,12 +8,13 @@ import { createRouter, createWebHistory } from 'vue-router'
 // import About from '@/components/About.vue'
 
 //引入组件
-import MybatisList from '@/components/bili/MybatisList.vue'
 import LocalMusic from '@/components/music/LocalMusic.vue'
 import Meting from '@/components/music/Meting.vue'
 
-import Douban from '@/components/media/Douban.vue'
-import Neodb from '@/components/media/Neodb.vue'
+import Douban from '@/components/douban/Douban.vue'
+import Neodb from '@/components/douban/Neodb.vue'
+import Bili from '@/components/bili/Bili.vue'
+import Md from '@/components/md/Md.vue'
 
 // import Tabs from '@/layout/Tabs.vue'
 
@@ -23,7 +24,7 @@ const router = createRouter({
   routes: [ //一个一个的路由规则
     {
       path: '/bili',
-      component: MybatisList
+      component: Bili,
     },
     {
       path: '/meting',
@@ -41,6 +42,11 @@ const router = createRouter({
       path: '/neodb',
       component: Neodb
     },
+    {
+      path: '/md',
+      component: Md
+    },
+
 
     // {
     // 	path:'/tabs',
