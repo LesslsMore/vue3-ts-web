@@ -6,6 +6,7 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 // 创建axios实例
 const service = axios.create({
   baseURL: 'http://localhost:8088',
+  // baseURL: 'http://192.168.1.2:8088',
   timeout: 15000 // 请求超时时间
 })
 

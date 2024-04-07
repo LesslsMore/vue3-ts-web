@@ -3,6 +3,10 @@
         <!-- <MybatisList/> -->
         <IndexeddbList/>
     </div>
+
+  <br/>
+  <RouterLink to="/douban/tabs">tabs</RouterLink>&nbsp;&nbsp;
+  <RouterView></RouterView>
 </template>
 
 <script setup>

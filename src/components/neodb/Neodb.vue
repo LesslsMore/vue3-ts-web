@@ -1,4 +1,5 @@
 <template>
+    
     <el-input v-model="token" style="width: 240px" placeholder="输入 token" />
     <br />
     <br />
@@ -10,9 +11,13 @@
     <el-checkbox-group v-model="checkList">
         <el-checkbox v-for="item, idx in supported_types" :key="idx" :label="item" :value="item" />
     </el-checkbox-group>
+    
+    <br/>
+    <RouterLink to="/neodb/tabs">tabs</RouterLink>&nbsp;&nbsp;
+    <RouterView></RouterView>
 
     <!-- <ElUpload/> -->
-    <Item />
+    <!-- <Tab /> -->
 </template>
 
 <script setup>
@@ -21,9 +26,9 @@ import { ref } from "vue"
 import { fetchData } from "./http"
 import { saveAs } from 'file-saver'
 import { Upload, Download } from '@element-plus/icons-vue'
-import ElUpload from "./Upload.vue"
+// import ElUpload from "./Upload.vue"
 
-import Item from "./Item.vue"
+import Tab from "./Tab.vue"
 
 let token = ref('z0nlEBpamCv9wMf6Oe0hV5kjMYu0P9')
 
@@ -71,7 +76,8 @@ async function upload(file) {
         let str = await file.arrayBuffer()
         let buffer = new Uint8Array(str);
         let string = new TextDecoder().decode(buffer);
-        console.log(string)
+        let type = file.name.split('.')[0]
+        localStorage.setItem(type, string)
     } catch (msg) {
         alert(msg);
     } finally {

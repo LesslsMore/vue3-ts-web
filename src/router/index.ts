@@ -8,11 +8,14 @@ import { createRouter, createWebHistory } from 'vue-router'
 // import About from '@/components/About.vue'
 
 //引入组件
-import LocalMusic from '@/components/music/LocalMusic.vue'
+import Files from '@/components/music/Files.vue'
 import Meting from '@/components/music/Meting.vue'
 
 import Douban from '@/components/douban/Douban.vue'
-import Neodb from '@/components/douban/Neodb.vue'
+import DoubanTabs from '@/components/douban/Tabs.vue'
+
+import Neodb from '@/components/neodb/Neodb.vue'
+import Tabs from '@/components/neodb/Tabs.vue'
 
 import Md from '@/components/md/Md.vue'
 
@@ -50,16 +53,30 @@ const router = createRouter({
       component: Meting
     },
     {
-      path: '/music',
-      component: LocalMusic
+      path: '/music/:path*',
+      // component: LocalMusic
+      component: Files,
+      props: true,
     },
     {
       path: '/douban',
-      component: Douban
+      component: Douban,
+      children: [
+        {
+          path:'tabs',
+          component:DoubanTabs
+        },
+      ]
     },
     {
       path: '/neodb',
-      component: Neodb
+      component: Neodb,
+      children: [
+        {
+          path:'tabs',
+          component:Tabs
+        },
+      ]
     },
     {
       path: '/md',
