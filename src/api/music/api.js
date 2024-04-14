@@ -86,15 +86,18 @@ export default class API {
     })
   }
   getOrScanFolds(path) {
-    if (path.length > 0) {
-      return this.request({
-        url: `/scan/fold/${path.join('/')}`,
-        method: 'post'
-      })
-    } else {
+    console.log(path)
+    if (path === undefined || path.length == 0) {
+      console.log('1')
       let fold = 'E:/T'
       return this.request({
         url: `/fold/${fold}`,
+        method: 'post'
+      })
+    } else {
+      console.log('2')
+      return this.request({
+        url: `/scan/fold/${path.join('/')}`,
         method: 'post'
       })
     }

@@ -77,7 +77,7 @@ if (val != null) {
 
 </script>
 
-<style>
+<style scoped>
 .hexo-neodb-tabs {
     margin-bottom: 15px;
     margin-top: 15px;

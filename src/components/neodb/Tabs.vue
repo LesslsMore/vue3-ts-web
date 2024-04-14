@@ -18,7 +18,7 @@ const supported_types = ['book', 'movie', 'tv', 'music', 'game']
 
 </script>
 
-<style>
+<style scoped>
 .hexo-neodb-tabs {
     margin-bottom: 15px;
     margin-top: 15px;

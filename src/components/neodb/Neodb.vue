@@ -1,5 +1,5 @@
 <template>
-    
+
     <el-input v-model="token" style="width: 240px" placeholder="输入 token" />
     <br />
     <br />
@@ -11,7 +11,7 @@
     <el-checkbox-group v-model="checkList">
         <el-checkbox v-for="item, idx in supported_types" :key="idx" :label="item" :value="item" />
     </el-checkbox-group>
-    
+
     <br/>
     <RouterLink to="/neodb/tabs">tabs</RouterLink>&nbsp;&nbsp;
     <RouterView></RouterView>
@@ -87,7 +87,7 @@ async function upload(file) {
 
 
 </script>
-<style>
+<style scoped>
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 html {
     line-height: 1.15;
