@@ -11,6 +11,10 @@ import 'element-plus/dist/index.css'
 
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
+//仓库大仓库
+import { createPinia } from 'pinia'
+//创建大仓库
+const pinia = createPinia()
 // import hljsVuePlugin from '@highlightjs/vue-plugin';
 
 
@@ -24,7 +28,7 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component)
 }
 
-
+app.use(pinia)
 // app.use(hljsVuePlugin);
 app.use(ElementPlus)
 // 使用路由器

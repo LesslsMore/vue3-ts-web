@@ -13,7 +13,7 @@
     </el-checkbox-group>
 
     <br/>
-    <RouterLink to="/neodb/tabs">tabs</RouterLink>&nbsp;&nbsp;
+<!--    <RouterLink to="/neodb/tabs">tabs</RouterLink>&nbsp;&nbsp;-->
     <RouterView></RouterView>
 
     <!-- <ElUpload/> -->
