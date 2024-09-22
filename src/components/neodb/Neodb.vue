@@ -1,11 +1,24 @@
 <template>
-
+    <div id="animation-container"></div>
     <el-input v-model="token" style="width: 240px" placeholder="输入 token" />
     <br />
     <br />
     <el-button type="primary" :icon="Download" @click="exportNeodbList()">导出 neodblist</el-button>
     <!-- <el-button type="primary" :icon="Upload" @click="importNeodbList()">导入 neodblist</el-button> -->
+
+    <el-button @click="get_items">items</el-button>
+
+    <el-upload
+        multiple
+        :auto-upload="false"
+        accept=".json"
+        :on-change="handleClick2"
+        :show-file-list="false"
+    >
+      <el-button :icon="Upload" type="primary">上传 top250 json</el-button>
+    </el-upload>
     <input ref="excel-upload-input" class="excel-upload-input" type="file" accept=".json" @change="handleClick">
+
     <br />
     <br />
     <el-checkbox-group v-model="checkList">
@@ -28,6 +41,8 @@ import { saveAs } from 'file-saver'
 import { Upload, Download } from '@element-plus/icons-vue'
 // import ElUpload from "./Upload.vue"
 
+import anime from 'animejs/lib/anime.es.js';
+
 import Tab from "./Tab.vue"
 
 let token = ref('z0nlEBpamCv9wMf6Oe0hV5kjMYu0P9')
@@ -37,6 +52,35 @@ const timeout = 10000
 
 // let checkList = ref(supported_types)
 let checkList = ref([])
+
+let items = ref([])
+
+function get_items() {
+  let val = localStorage.getItem(supported_types[3])
+
+  if (val != null) {
+    items.value = JSON.parse(val)
+    console.log(items.value.complete)
+
+
+    const container = document.getElementById('animation-container');
+
+    items.value.complete.forEach((item, index) => {
+      const bar = document.createElement('div');
+      bar.classList.add('bar');
+      // bar.style.width = `${item.rank * 10}px`;
+      bar.textContent = `${item.title}. ${item.rating}`;
+      container.appendChild(bar);
+
+      anime({
+        targets: bar,
+        width: '100%',
+        easing: 'easeOutQuad',
+        duration: 1000 + index * 500
+      });
+    });
+  }
+}
 
 async function exportNeodbList() {
     let types = checkList.value
@@ -68,7 +112,16 @@ async function handleClick(e) {
     console.log(rawFile)
     await upload(rawFile)
     // this.import(rawFile)
+}
 
+const handleClick2 = async (file) => {
+  console.log('handleClick2...')
+  console.log(new Date())
+  let json_str = await file.raw.text()
+  let type = file.name.split('.')[0]
+  console.log(type)
+  // localStorage.setItem(type, json_str)
+  console.log(new Date())
 }
 
 async function upload(file) {

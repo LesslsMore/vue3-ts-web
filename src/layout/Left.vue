@@ -6,7 +6,6 @@
     <!--        @select="handleSelect"-->
     <!--        router-->
     <!--    >-->
-    <!--      <el-menu-item index="/bili">bili 分段视频搜索</el-menu-item>-->
     <!--    </el-menu>-->
 
     <el-tree
@@ -31,6 +30,7 @@ const router = useRouter()
 const handleNodeClick = (data, node) => {
   // console.log(data,b,c,d)
   // getPath(node)
+  console.log(node.data.name);
   router.push({name: node.data.name})
 }
 

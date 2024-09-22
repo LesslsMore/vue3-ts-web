@@ -1,39 +1,5 @@
 export const constantRoute = [ //一个一个的路由规则
     {
-        path: '/bili',
-        name: 'bili',
-        meta: {
-            label: 'bili 分段视频搜索',
-        },
-        component: () => import('@/components/bili/Bili.vue'),
-        children: [
-            {
-                path: 'indexed',
-                name: 'indexed',
-                meta: {
-                    label: 'IndexeddbList',
-                },
-                component: () => import('@/components/bili/IndexeddbList.vue')
-            },
-            {
-                path: 'mybatis',
-                name: 'mybatis',
-                meta: {
-                    label: 'MybatisList',
-                },
-                component: () => import('@/components/bili/MybatisList.vue')
-            },
-            {
-                path: 'mongo',
-                name: 'mongo',
-                meta: {
-                    label: 'MongodbList',
-                },
-                component: () => import('@/components/bili/MongodbList.vue')
-            }
-        ]
-    },
-    {
         path: '/meting',
         name: 'meting',
         meta: {
@@ -52,24 +18,24 @@ export const constantRoute = [ //一个一个的路由规则
         component: () => import('@/components/music/Files.vue'),
         props: true,
     },
-    {
-        path: '/douban',
-        name: 'douban',
-        meta: {
-            label: 'douban excel 导入',
-        },
-        component: () => import('@/components/douban/Douban.vue'),
-        children: [
-            {
-                path: 'tabs',
-                name: 'douban-tabs',
-                meta: {
-                    label: 'douban top250 抓取',
-                },
-                component: () => import('@/components/douban/Tabs.vue')
-            },
-        ]
-    },
+    // {
+    //     path: '/douban',
+    //     name: 'douban',
+    //     meta: {
+    //         label: 'douban excel 导入',
+    //     },
+    //     component: () => import('@/components/douban/Douban.vue'),
+    //     children: [
+    //         {
+    //             path: 'tabs',
+    //             name: 'douban-tabs',
+    //             meta: {
+    //                 label: 'douban top250 抓取',
+    //             },
+    //             component: () => import('@/components/douban/Tabs.vue')
+    //         },
+    //     ]
+    // },
     {
         path: '/neodb',
         name: 'neodb',
@@ -89,6 +55,32 @@ export const constantRoute = [ //一个一个的路由规则
         ]
     },
     {
+        path: '/bili',
+        name: 'bili',
+        meta: {
+            label: 'bili 分段视频搜索',
+        },
+        // component: () => import('@/components/bili/App.vue'),
+        children: [
+            {
+                path: '/mongo',
+                name: 'mongo',
+                meta: {
+                    label: 'mongo',
+                },
+                component: () => import('@/components/Mongo.vue')
+            }
+        ]
+    },
+    {
+        path: '/swiper',
+        name: 'swiper',
+        meta: {
+            label: 'swiper',
+        },
+        component: () => import('@/components/neodb/swiper.vue')
+    },
+    {
         path: '/md',
         name: 'md',
         meta: {
@@ -103,6 +95,22 @@ export const constantRoute = [ //一个一个的路由规则
             label: 'live2d 模型加载',
         },
         component: () => import('@/components/live2d/Live2d.vue')
+    },
+    {
+        path: '/live2d2',
+        name: 'live2d2',
+        meta: {
+            label: 'live2d 模型加载',
+        },
+        component: () => import('@/components/live2d/Live2d2.vue')
+    },
+    {
+        path: '/live2d3',
+        name: 'live2d3',
+        meta: {
+            label: 'live2d 模型加载',
+        },
+        component: () => import('@/components/live2d/Live2d3.vue')
     },
 
 ]

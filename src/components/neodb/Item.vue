@@ -2,9 +2,9 @@
     <!-- <div></div> -->
     <div class="hexo-neodb-items" v-for="item, id in itemlist" :key="id">
         <div class="hexo-neodb-item">
-            <!-- <div class="hexo-neodb-picture">
-                <img :src="item.image" loading="lazy" referrerpolicy="no-referrer">
-            </div> -->
+            <div class="hexo-neodb-picture">
+<!--                <img :src="item.image" loading="lazy" referrerpolicy="no-referrer">-->
+            </div>
             <div class="hexo-neodb-info">
                 <div class="hexo-neodb-title"><a :href="item.alt" target="_blank">{{ item.title }}</a></div>
                 <div class="hexo-neodb-meta" style="-webkit-line-clamp: 4">{{ item.meta }}</div>

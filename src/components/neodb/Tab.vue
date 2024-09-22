@@ -52,8 +52,6 @@
 import Item from "./Item.vue"
 import { ref } from 'vue'
 
-// import Search from '@/components/bili/Search.vue'
-// import List from '@/components/bili/mybatis-plus/list.vue'
 // import Music from '@/components/localmusic/Music.vue'
 // import Meting from '@/components/meting/Meting.vue'
 
@@ -69,7 +67,7 @@ let val = localStorage.getItem(props.type)
 let items = ref([])
 if (val != null) {
     items.value = JSON.parse(val)
-    // console.log(items.value)
+    console.log(items.value)
 }
 
 

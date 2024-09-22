@@ -38,11 +38,8 @@
 import { reactive, ref } from 'vue'
 import { Delete, Edit, Search, Refresh, Share, Upload } from '@element-plus/icons-vue'
 
-import api from '@/api/bili/bili'
 
 import ExcelJS from 'exceljs'
-
-import newDB from '@/components/bili/db'
 
 const searchObjRef = ref()
 

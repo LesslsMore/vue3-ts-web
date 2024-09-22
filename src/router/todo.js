@@ -1,5 +1,21 @@
 export const todoRoute = [
     {
+        path: '/navi',
+        name: 'navi',
+        meta: {
+            label: 'chrome 收藏导航',
+        },
+        component: () => import('@/components/navi/Navi.vue')
+    },
+    {
+        path: '/webdav',
+        name: 'webdav',
+        meta: {
+            label: 'webdav',
+        },
+        component: () => import('@/components/webdav/Webdav.vue')
+    },
+    {
         meta: {
             label: 'cms 视频播放',
         },
@@ -12,11 +28,6 @@ export const todoRoute = [
     {
         meta: {
             label: 'mbti political 测试',
-        },
-    },
-    {
-        meta: {
-            label: 'chrome 收藏导航',
         },
     },
     {

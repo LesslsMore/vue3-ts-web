@@ -6,10 +6,8 @@
   </el-tabs>
 </template>
 
-
 <script setup>
 import { ref } from 'vue'
-import Item from "@/components/neodb/Item.vue";
 import {Download} from "@element-plus/icons-vue";
 import {getDoubanTop250} from './get-douban-top250.js'
 

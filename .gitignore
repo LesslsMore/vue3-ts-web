@@ -30,3 +30,9 @@ coverage
 *.tsbuildinfo
 
 .vercel
+/public/
+/.vscode/
+/img/
+/public/
+/scripts/
+/script/

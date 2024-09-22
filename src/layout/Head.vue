@@ -16,6 +16,7 @@
 <script setup name="Head">
 //获取用户相关的小仓库
 import useProjStore from '@/stores/proj';
+
 let projStore = useProjStore();
 
 import {todoRoute} from "@/router/todo.js";
@@ -24,11 +25,11 @@ import {ref} from "vue";
 
 const activeIndex = ref('2')
 const handleSelect = (key, keyPath) => {
-if (key === '1') {
-  projStore.proj = todoRoute
-} else if (key === "2") {
-  projStore.proj = constantRoute
-}
+  if (key === '1') {
+    projStore.proj = todoRoute
+  } else if (key === "2") {
+    projStore.proj = constantRoute
+  }
 }
 </script>
 

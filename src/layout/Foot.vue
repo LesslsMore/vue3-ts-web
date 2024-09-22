@@ -1,13 +1,13 @@
-<script setup lang="ts" name="Foot">
-
-</script>
-
 <template>
   <div class="layout_footer">
     footer
 
   </div>
 </template>
+
+<script setup lang="ts" name="Foot">
+
+</script>
 
 <style scoped lang="scss">
 .layout_footer {

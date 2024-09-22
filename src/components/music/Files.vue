@@ -121,6 +121,11 @@ async function setPath() {
   // await Api.post_scan()
 }
 
+function setUrl() {
+  console.log(server_url.value)
+  api = new API(server_url.value)
+}
+
 function handleNodeClick(data) {
   console.log(data.path)
   // const path = this.path.length === 0 ? id : [...this.path, id].join('/')

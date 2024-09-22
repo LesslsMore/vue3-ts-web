@@ -1,12 +1,12 @@
-<script setup lang="ts">
-
-</script>
-
 <template>
   <div class="layout_right">
     right
   </div>
 </template>
+
+<script setup lang="ts">
+
+</script>
 
 <style scoped lang="scss">
 .layout_right {

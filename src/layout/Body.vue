@@ -1,13 +1,12 @@
-<script setup lang="ts">
-
-import {RouterView} from "vue-router";
-</script>
-
 <template>
   <div class="layout_main">
     <RouterView></RouterView>
   </div>
 </template>
+
+<script setup lang="ts">
+import {RouterView} from "vue-router";
+</script>
 
 <style scoped lang="scss">
 .layout_main {
