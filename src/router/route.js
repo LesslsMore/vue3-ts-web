@@ -126,13 +126,13 @@ const doingRoute = [ //一个一个的路由规则
         component: () => import('@/components/neodb/swiper.vue')
     },
     {
-        path: '/md',
-        name: 'md',
+        path: '/md/test',
+        name: 'md/test',
         meta: {
             label: 'md 数学公式',
         },
         props: true,
-        component: () => import('@/components/md/Md.vue')
+        component: () => import('@/components/md/MdTest.vue')
     },
     {
         path: '/live2d',
@@ -167,6 +167,15 @@ const route = [
         name: "List",
         component: () => import("@/components/neodb/List.vue"), // 替换为你的 List 组件路径
         props: true,
+    },
+    {
+        path: '/md',
+        name: 'md',
+        meta: {
+            label: 'md 数学公式',
+        },
+        props: true,
+        component: () => import('@/components/md/Md.vue')
     },
 ];
 

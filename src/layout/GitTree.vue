@@ -87,7 +87,6 @@ const handleNodeClick = (nodeData, node) => {
       name: 'md',
       query: {
         title: nodeData.name.slice(0, -3),
-        // filePath: nodeData.path + '/' + nodeData.name,
         url: nodeData.download_url
       }
     });

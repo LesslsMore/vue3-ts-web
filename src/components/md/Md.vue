@@ -1,40 +1,40 @@
 <template>
-<!--  <el-scrollbar>-->
-<!--    <el-card>-->
-<!--      <template #header>-->
-<!--        <div class="card-header">-->
-<!--          <span>-->
-<!--            <h1>{{ title }}</h1>-->
-<!--          </span>-->
-<!--        </div>-->
-<!--      </template>-->
-<!--      <div v-html="content"></div>-->
-<!--      <template #footer>-->
-<!--        <div class="copyright">©2020 - 2025 By Less ls More.</div>-->
-<!--      </template>-->
-<!--    </el-card>-->
-<!--  </el-scrollbar>-->
+  <!--  <el-scrollbar>-->
+  <!--    <el-card>-->
+  <!--      <template #header>-->
+  <!--        <div class="card-header">-->
+  <!--          <span>-->
+  <!--            <h1>{{ title }}</h1>-->
+  <!--          </span>-->
+  <!--        </div>-->
+  <!--      </template>-->
+  <!--      <div v-html="content"></div>-->
+  <!--      <template #footer>-->
+  <!--        <div class="copyright">©2020 - 2025 By Less ls More.</div>-->
+  <!--      </template>-->
+  <!--    </el-card>-->
+  <!--  </el-scrollbar>-->
 
-    <div class="app-container">
-        <div>
-            <h1>{{ title }}</h1>
-        </div>
-
-        <div v-html="content"></div>
-        <!-- <div>
-            {{ content }}
-        </div> -->
-
+  <div class="app-container">
+    <div>
+      <h1>{{ title }}</h1>
     </div>
+
+    <div v-html="content"></div>
+    <!-- <div>
+        {{ content }}
+    </div> -->
+
+  </div>
 
 </template>
 
 <script setup>
-import { onMounted, onUpdated, ref } from "vue";
-import { markdownParser, updateMathjax } from "./utils/helper";
+import {onMounted, onUpdated, ref} from "vue";
+import {markdownParser, updateMathjax} from "./utils/helper";
 import {useRoute} from "vue-router";
 import {getFile} from "@/api/github";
-import { provide } from "vue";
+import {provide} from "vue";
 
 // import throttle from "lodash.throttle";
 
@@ -45,27 +45,24 @@ let toc = ref(''); // Add a ref for TOC
 // let handleUpdateMathjax = throttle(updateMathjax, THROTTLE_MATHJAX_TIME);
 
 onMounted(() => {
-    try {
-        updateMathjax()
-    } catch (e) {
-        console.log(e);
-    }
+  try {
+    updateMathjax()
+    updateMd()
+  } catch (e) {
+    console.log(e);
+  }
 
-
-    // // console.log('挂载完毕')
-    // if (pluginCenter.mathjax) {
-    //     handleUpdateMathjax();
-    // }
+  // // console.log('挂载完毕')
+  // if (pluginCenter.mathjax) {
+  //     handleUpdateMathjax();
+  // }
 })
 
 const route = useRoute()
 
-onUpdated(() => {
-  updateMathjax()
-  // // console.log('更新完毕')
-  // if (pluginCenter.mathjax) {
-  //     handleUpdateMathjax();
-  // }
+function updateMd() {
+  console.log(route)
+
   title.value = route.query.title
   let url = route.query.url
   console.log(url)
@@ -84,70 +81,78 @@ onUpdated(() => {
 
     // console.log('toc: ', toc.value)
   })
+}
+
+onUpdated(() => {
+  try {
+    updateMathjax()
+    updateMd()
+  } catch (e) {
+    console.log(e);
+  }
 })
 
 provide('toc', toc); // Provide the TOC to child components
 
 async function handleClick(e) {
-    const files = e.target.files
-    const rawFile = files[0] // only use files[0]
-    if (!rawFile) return
-    // console.log(rawFile)
-    await upload(rawFile)
+  const files = e.target.files
+  const rawFile = files[0] // only use files[0]
+  if (!rawFile) return
+  // console.log(rawFile)
+  await upload(rawFile)
 }
 
 
-
 async function upload(file) {
-    try {
-        // console.log(dbFile)
+  try {
+    // console.log(dbFile)
 
-        // modal.open('正在恢复数据库。请不要关闭当前窗口');
-        // let storage = new Storage();
-        let str = await file.arrayBuffer()
-        let buffer = new Uint8Array(str);
-        // console.log(str)
-        // console.log(buffer)
+    // modal.open('正在恢复数据库。请不要关闭当前窗口');
+    // let storage = new Storage();
+    let str = await file.arrayBuffer()
+    let buffer = new Uint8Array(str);
+    // console.log(str)
+    // console.log(buffer)
 
 
-        let string = new TextDecoder().decode(buffer);
+    let string = new TextDecoder().decode(buffer);
 
-        console.log(string)
+    console.log(string)
 
-        const parseHtml = markdownParser.render(string)
+    const parseHtml = markdownParser.render(string)
 
-        console.log(parseHtml)
-        content.value = parseHtml
+    console.log(parseHtml)
+    content.value = parseHtml
 
-        // const workbook = new ExcelJS.Workbook();
-        // const worksheet = await workbook.xlsx.load(buffer);
+    // const workbook = new ExcelJS.Workbook();
+    // const worksheet = await workbook.xlsx.load(buffer);
 
-        // let worksheets = worksheet.worksheets
+    // let worksheets = worksheet.worksheets
 
-        // let excel = {}
+    // let excel = {}
 
-        // worksheets.forEach(sheet => {
-        //     if (sheet.rowCount > 1) {
-        //         excel[sheet.name] = get_json_by_sheet(sheet)
-        //     }
-        // })
+    // worksheets.forEach(sheet => {
+    //     if (sheet.rowCount > 1) {
+    //         excel[sheet.name] = get_json_by_sheet(sheet)
+    //     }
+    // })
 
-        // console.log(excel)
+    // console.log(excel)
 
-        // for (let key in excel) {
-        //     console.log(key)
-        //     let rows = excel[key]
-        //     for (let i = 0; i < rows.length; i++) {
-        //         // console.log(rows[i])
-        //         await db.douban.put(rows[i])
-        //     }
-        // }
+    // for (let key in excel) {
+    //     console.log(key)
+    //     let rows = excel[key]
+    //     for (let i = 0; i < rows.length; i++) {
+    //         // console.log(rows[i])
+    //         await db.douban.put(rows[i])
+    //     }
+    // }
 
-    } catch (msg) {
-        alert(msg);
-    } finally {
-        // modal.close();
-    }
+  } catch (msg) {
+    alert(msg);
+  } finally {
+    // modal.close();
+  }
 }
 
 </script>
