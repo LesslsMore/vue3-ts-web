@@ -26,11 +26,6 @@
     </el-checkbox-group>
 
     <br/>
-<!--    <RouterLink to="/neodb/tabs">tabs</RouterLink>&nbsp;&nbsp;-->
-    <RouterView></RouterView>
-
-    <!-- <ElUpload/> -->
-    <!-- <Tab /> -->
 </template>
 
 <script setup>

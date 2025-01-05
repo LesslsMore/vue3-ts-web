@@ -116,4 +116,6 @@ function loadPlayer(data, ap) {
 
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

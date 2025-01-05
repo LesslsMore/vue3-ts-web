@@ -1,7 +1,15 @@
 <template>
   <div class="layout_footer">
-    footer
-
+    <div id="footer-wrap">
+      <div class="copyright">©2020 - 2025 By Less ls More.</div>
+<!--      <div class="framework-info">-->
+<!--        <span>框架 </span>-->
+<!--        <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>-->
+<!--        <span class="footer-separator">|</span>-->
+<!--        <span>主题 </span>-->
+<!--        <a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a>-->
+<!--      </div>-->
+    </div>
   </div>
 </template>
 
@@ -11,9 +19,12 @@
 
 <style scoped lang="scss">
 .layout_footer {
-  position: absolute;
+  position: relative;
+  bottom: 0;
   width: 100%;
   height: $base-tabbar-height;
-  background-color: #5cb85c;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 </style>

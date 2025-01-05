@@ -1,72 +1,33 @@
 <template>
   <div class="layout_left">
-    <!--    <el-menu-->
-    <!--        :default-active="activeIndex"-->
-    <!--        class="el-menu-demo"-->
-    <!--        @select="handleSelect"-->
-    <!--        router-->
-    <!--    >-->
-    <!--    </el-menu>-->
-
-    <el-tree
-        style="max-width: 600px"
-        default-expand-all
-        :data="projStore.proj"
-        :props="defaultProps"
-        @node-click="handleNodeClick"
-    >
-    </el-tree>
+    <el-scrollbar>
+      <el-card body-style="padding: 0px">
+        <div v-if="projStore.proj.length > 0">
+          <ProjTree></ProjTree>
+        </div>
+        <div v-else>
+<!--          <ZfileTree></ZfileTree>-->
+          <GitTree></GitTree>
+        </div>
+      </el-card>
+    </el-scrollbar>
   </div>
 </template>
-<script setup name="Left">
-import {useRouter} from "vue-router";
-
-import {ref} from "vue";
+<script setup>
 import useProjStore from '@/stores/proj';
+import ProjTree from "@/layout/ProjTree.vue";
+import ZfileTree from "@/layout/ZfileTree.vue";
+import GitTree from "@/layout/GitTree.vue";
 
 let projStore = useProjStore();
 
-const router = useRouter()
-const handleNodeClick = (data, node) => {
-  // console.log(data,b,c,d)
-  // getPath(node)
-  console.log(node.data.name);
-  router.push({name: node.data.name})
-}
-
-function getPath(node) {
-  console.log(node)
-  console.log(node.parent.data instanceof Array)
-  if (node.parent.data instanceof Array) {
-    return node.data.path
-
-  } else {
-    return getPath(node.parent) + '/' + node.data.path
-  }
-}
-
-const defaultProps = {
-  children: 'children',
-  label: getLabel,
-}
-
-function getLabel(data, node) {
-  // console.log(data, node)
-  return data.meta.label
-}
 </script>
 
 <style scoped lang="scss">
 .layout_left {
-  position: absolute;
+  position: fixed;
   width: $base-menu-width;
-  height: 100vh;
+  height: calc(100% - $base-tabbar-height);
   top: $base-tabbar-height;
-  background: #d1dbe5;
-
-  .scrollbar {
-    width: 100%;
-    height: calc(100vh - $base-menu-logo-height);
-  }
 }
 </style>

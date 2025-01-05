@@ -1,4 +1,5 @@
 <template>
+
   <div class="app">
     <!--        <el-scrollbar>-->
     <!--        </el-scrollbar>-->
@@ -11,6 +12,23 @@
     </div>
 
   </div>
+
+<!--  <div class="common-layout">-->
+<!--    <el-container>-->
+<!--      <el-header>Header-->
+<!--      </el-header>-->
+<!--      -->
+<!--      <el-container>-->
+<!--        <el-aside width="200px">Aside</el-aside>-->
+<!--        -->
+<!--        <el-container>-->
+<!--          <el-main>Main</el-main>-->
+<!--          <el-footer>Footer</el-footer>-->
+<!--        </el-container>-->
+<!--        -->
+<!--      </el-container>-->
+<!--    </el-container>-->
+<!--  </div>-->
 </template>
 
 <script setup name="App">
@@ -22,8 +40,4 @@ import Foot from "@/layout/Foot.vue"
 </script>
 
 <style scoped lang="scss">
-//.layout_container {
-//  width: 100%;
-//  height: 100vh;
-//}
 </style>

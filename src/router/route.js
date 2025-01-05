@@ -1,4 +1,48 @@
-export const constantRoute = [ //一个一个的路由规则
+const todoRoute = [
+    {
+        path: '/navi',
+        name: 'navi',
+        meta: {
+            label: 'chrome 收藏导航',
+        },
+        component: () => import('@/components/navi/Navi.vue')
+    },
+    {
+        path: '/webdav',
+        name: 'webdav',
+        meta: {
+            label: 'webdav',
+        },
+        component: () => import('@/components/webdav/Webdav.vue')
+    },
+    {
+        meta: {
+            label: 'cms 视频播放',
+        },
+    },
+    {
+        meta: {
+            label: 'epub gitboot 电子书',
+        },
+    },
+    {
+        meta: {
+            label: 'mbti political 测试',
+        },
+    },
+    {
+        meta: {
+            label: 'midi 钢琴游戏',
+        },
+    },
+    {
+        meta: {
+            label: 'webgal 4399 游戏',
+        },
+    },
+]
+
+const doingRoute = [ //一个一个的路由规则
     {
         path: '/meting',
         name: 'meting',
@@ -44,15 +88,16 @@ export const constantRoute = [ //一个一个的路由规则
         },
         component: () => import('@/components/neodb/Neodb.vue'),
         children: [
-            {
-                path: 'tabs',
-                name: 'neodb-tabs',
-                meta: {
-                    label: 'neodb json 显示',
-                },
-                component: () => import('@/components/neodb/Tabs.vue')
-            },
+
         ]
+    },
+    {
+        path: '/tabs',
+        name: 'neodb-tabs',
+        meta: {
+            label: 'neodb json 显示',
+        },
+        component: () => import('@/components/neodb/Tabs.vue')
     },
     {
         path: '/bili',
@@ -86,6 +131,7 @@ export const constantRoute = [ //一个一个的路由规则
         meta: {
             label: 'md 数学公式',
         },
+        props: true,
         component: () => import('@/components/md/Md.vue')
     },
     {
@@ -115,4 +161,17 @@ export const constantRoute = [ //一个一个的路由规则
 
 ]
 
+const route = [
+    {
+        path: "/list",
+        name: "List",
+        component: () => import("@/components/neodb/List.vue"), // 替换为你的 List 组件路径
+        props: true,
+    },
+];
 
+export {
+    todoRoute,
+    doingRoute,
+    route,
+}

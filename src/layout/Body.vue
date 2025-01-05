@@ -1,28 +1,60 @@
 <template>
+
   <div class="layout_main">
-    <RouterView></RouterView>
+    <el-scrollbar>
+      <el-card>
+
+
+        <RouterView></RouterView>
+
+        <template #footer>
+          <div class="copyright">©2020 - 2025 By Less ls More.</div>
+        </template>
+      </el-card>
+    </el-scrollbar>
+
+
+
+<!--    <Foot></Foot>-->
   </div>
+
 </template>
 
 <script setup lang="ts">
 import {RouterView} from "vue-router";
+import Foot from "@/layout/Foot.vue"
 </script>
 
 <style scoped lang="scss">
 .layout_main {
+  //border-left: 1px lightgray solid;
+  //border-right: 1px lightgray solid;
+  //padding: 20px 40px;
+
   position: absolute;
+
   width: calc(100% - $base-menu-width * 2);
-  height: calc(100vh - $base-tabbar-height);
+  height: calc(100% - $base-tabbar-height);
+
   left: $base-menu-width;
+  right: $base-menu-width;
   top: $base-tabbar-height;
-  //padding: 20px;
-  overflow: auto;
-  transition: all 0.3s;
 
-  &.fold {
-    width: calc(100vw - $base-menu-min-width);
-    left: $base-menu-min-width;
-  }
-
+  //overflow: auto;
+  //
+  //background-color: white;
+}
+.el-card {
+  //position: absolute;
+  //height: 100%
+}
+.copyright {
+  position: relative;
+  //bottom: 0;
+  //width: 100%;
+  //height: $base-tabbar-height;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 </style>
