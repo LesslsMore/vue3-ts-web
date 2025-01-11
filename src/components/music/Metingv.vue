@@ -1,8 +1,4 @@
 <template>
-    <div id="app">
-        <!-- 准备一个容器用来存放音乐播放器 -->
-        <div id="aplayer"></div>
-    </div>
 </template>
 
 <script setup>
@@ -29,6 +25,7 @@ watch(
     id,
     async (val) => {
         console.log(val)
+      // 5192140005
         parse()
     },
     // { immediate: true }

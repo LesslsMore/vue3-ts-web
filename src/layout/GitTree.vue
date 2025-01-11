@@ -86,7 +86,7 @@ const handleNodeClick = (nodeData, node) => {
     router.push({
       name: 'md',
       query: {
-        title: nodeData.name.slice(0, -3),
+        name: nodeData.name.slice(0, -3),
         url: nodeData.download_url
       }
     });

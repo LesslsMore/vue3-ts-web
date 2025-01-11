@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-wrap gap-4 items-center">
-        
+
         <el-select v-model="server" placeholder="选择音乐" filterable default-first-option size="large" style="width: 240px">
             <el-option v-for="item, idx in servers" :key="idx" :label="item" :value="item" />
         </el-select>
@@ -32,7 +32,7 @@ import Metingv from './Metingv.vue';
 
 let list_id = ref('')
 
-let uid = ref('309153929')
+let uid = ref(import.meta.env.VITE_netease_uid)
 // let value_t = ref('')
 
 // watch(value_n, (val)=>{
@@ -91,7 +91,7 @@ const getSongList = async () => {
 //         let label = el.name
 //         return {
 //             value,label
-//         } 
+//         }
 //     })
 //     console.log(options.value)
 
@@ -101,7 +101,7 @@ const getSongList = async () => {
 //     //     let label = el.name
 //     //     return {
 //     //         value,label
-//     //     } 
+//     //     }
 //     // })
 //     // console.log(options_t.value)
 // })

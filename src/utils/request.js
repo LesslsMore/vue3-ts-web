@@ -5,9 +5,7 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 
 // 创建axios实例
 const service = axios.create({
-  baseURL: 'https://lesslsmore-api.vercel.app/',
-  // baseURL: 'http://127.0.0.1:8964',
-  // baseURL: 'http://127.0.0.1:5050',
+  baseURL: import.meta.env.VITE_baseURL,
   timeout: 15000 // 请求超时时间
 })
 

@@ -11,6 +11,8 @@
 <!--      <Foot></Foot>-->
     </div>
 
+    <!-- 准备一个容器用来存放音乐播放器 -->
+    <div id="aplayer"></div>
   </div>
 
 <!--  <div class="common-layout">-->
