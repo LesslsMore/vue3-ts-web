@@ -135,6 +135,14 @@ const doingRoute = [ //一个一个的路由规则
         component: () => import('@/components/md/MdTest.vue')
     },
     {
+        path: '/pdf',
+        name: 'pdf',
+        meta: {
+            label: 'pdf 预览',
+        },
+        component: () => import('@/components/md/Pdf.vue')
+    },
+    {
         path: '/live2d',
         name: 'live2d',
         meta: {
