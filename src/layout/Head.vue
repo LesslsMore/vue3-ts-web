@@ -1,146 +1,192 @@
 <template>
-  <div class="layout-head">
-    <div class="head-left">
-      <el-menu
+    <el-menu
           :default-active="activeIndex"
           class="el-menu-demo"
           mode="horizontal"
           @select="handleSelect"
+          :collapse="false"
+          :ellipsis="false"
       >
-        <el-menu-item index="md">
-          <el-icon><Document /></el-icon>
-          文章</el-menu-item>
-        <el-menu-item index="todo">
-          <el-icon><WarningFilled /></el-icon>
-          todo</el-menu-item>
-        <el-menu-item index="doing">
-          <el-icon><QuestionFilled /></el-icon>
-          doing</el-menu-item>
-        <el-menu-item index="done">
-          <el-icon><SuccessFilled /></el-icon>
-          done</el-menu-item>
-      </el-menu>
-    </div>
-
-    <div class="head-mid">
-      Less ls More.
-    </div>
-
-    <div class="head-right">
-      <div>
-        <el-icon><HomeFilled />
-        </el-icon>
-        主页
+      <div class="head-left">
+        <recursive-menu :menu-items="leftMenuItems" />
       </div>
 
-
-      <el-dropdown @command="handleCommand">
-        <span class="el-dropdown-link">
-          <el-icon><List /></el-icon>
-          清单
-          <el-icon class="el-icon--right">
-            <arrow-down/>
-          </el-icon>
-        </span>
-        <template #dropdown>
-          <el-dropdown-menu>
-            <el-dropdown-item command="Music">
-              <el-icon><Headset /></el-icon>
-              Music</el-dropdown-item>
-            <el-dropdown-item command="Movie">
-              <el-icon><Film /></el-icon>
-              Movie</el-dropdown-item>
-            <el-dropdown-item command="Book">
-              <el-icon><Notebook /></el-icon>
-              Book
-            </el-dropdown-item>
-            <el-dropdown-item command="Game">
-              <el-icon><SwitchFilled /></el-icon>
-              Game</el-dropdown-item>
-            <el-dropdown-item command="TV">
-              <el-icon><Monitor /></el-icon>
-              TV
-            </el-dropdown-item>
-          </el-dropdown-menu>
-        </template>
-      </el-dropdown>
-
-      <div>
-        <el-icon><Avatar />
-        </el-icon>
-        关于
+      <div class="head-mid">
+        Less ls More.
       </div>
 
-    </div>
-  </div>
+      <div class="head-right">
+        <recursive-menu :menu-items="rightMenuItems" />
+      </div>
+    </el-menu>
 </template>
 
 <script setup name="Head">
-//获取用户相关的小仓库
 import useProjStore from '@/stores/proj';
+import { useLayoutStore } from '@/stores/layout';
+import { ref } from "vue";
+import router from "@/router";
+import {todoRoute, doingRoute} from "@/router/route.js";
+import RecursiveMenu from '@/components/common/RecursiveMenu.vue';
 
 let projStore = useProjStore();
+const layoutStore = useLayoutStore();
+const activeIndex = ref('2');
 
-import {todoRoute, doingRoute} from "@/router/route.js";
-import {ref} from "vue";
-import router from "@/router";
+const leftMenuItems = [
+  {
+    index: 'todo',
+    title: 'todo',
+    icon: 'WarningFilled'
+  },
+  {
+    index: 'doing',
+    title: 'doing',
+    icon: 'QuestionFilled'
+  },
+  {
+    index: 'done',
+    title: 'done',
+    icon: 'SuccessFilled'
+  },
+  {
+    index: 'md',
+    title: '文章',
+    icon: 'Document'
+  }
+];
 
-const activeIndex = ref('2')
+const rightMenuItems = [
+  {
+    index: 'mastodon',
+    title: 'Mastodon',
+    icon: 'ChatLineRound'
+  },
+  {
+    index: 'home',
+    title: '主页',
+    icon: 'HomeFilled'
+  },
+  {
+    index: 'list',
+    title: '清单',
+    icon: 'List',
+    children: [
+      {
+        index: 'Music',
+        title: 'Music',
+        icon: 'Headset',
+      //   children: [
+      // {
+      //   index: 'Music',
+      //   title: 'Music',
+      //   icon: 'Headset'
+      // }      ,{
+      //   index: 'Movie',
+      //   title: 'Movie',
+      //   icon: 'Film'
+      // }]
+      },
+      {
+        index: 'Movie',
+        title: 'Movie',
+        icon: 'Film'
+      },
+      {
+        index: 'Book',
+        title: 'Book',
+        icon: 'Notebook'
+      },
+      {
+        index: 'Game',
+        title: 'Game',
+        icon: 'SwitchFilled'
+      },
+      {
+        index: 'TV',
+        title: 'TV',
+        icon: 'Monitor'
+      }
+    ]
+  },
+  {
+    index: 'about',
+    title: '关于',
+    icon: 'Avatar'
+  }
+];
+
 const handleSelect = (key, keyPath) => {
   if (key === 'todo') {
     projStore.proj = todoRoute
+    layoutStore.setShowToc(false)
   } else if (key === "doing") {
     projStore.proj = doingRoute
-  } else {
+    layoutStore.setShowToc(false)
+  } else if (key === 'mastodon') {
+    router.push({name: key})
+    layoutStore.setShowToc(false)
+  } else if (key === 'md') {
     projStore.proj = []
-  }
-}
+    layoutStore.setShowToc(true)
+  } else if (key === 'home') {
+    router.push('/');
+  } else if (key === 'about') {
+    const nodeData = {
+      name: 'README.md',
+      download_url: 'https://raw.githubusercontent.com/LesslsMore/lesslsmore/refs/heads/main/README.md'
+    }
 
-const handleCommand = (command) => {
-  router.push({
-    path: "/list",
-    query: { type: command }, // 通过 query 传递参数
-  });
-};
+    // router.push('/about');
+
+    router.push({
+      name: 'md',
+      query: {
+        name: nodeData.name.slice(0, -3),
+        url: nodeData.download_url
+      }
+    });
+    
+    layoutStore.setShowToc(true)
+  } else if (['Music', 'Movie', 'Book', 'Game', 'TV'].includes(key)) {
+    router.push({
+      path: "/list",
+      query: { type: key },
+    });
+  } 
+  // else {
+  //   projStore.proj = []
+  //   layoutStore.setShowToc(false)
+  // }
+}
 </script>
 
-
 <style scoped lang="scss">
-
 .el-menu-demo {
-  position: fixed;
-  width: 100%;
   display: flex;
-  flex-direction: row;
-  //justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
+  width: 100%;
 }
 
 .head-left {
-  position: fixed;
-  width: $base-menu-width;
-  height: $base-tabbar-height;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex: 3;
 }
 
 .head-mid {
-  position: fixed;
-  left: $base-menu-width;
-  right: $base-menu-width;
-  width: calc(100% - $base-menu-width * 2);
-  height: $base-tabbar-height;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  flex: 1;
 }
 
 .head-right {
-  position: fixed;
-  width: $base-menu-width;
-  right: 0;
-  height: $base-tabbar-height;
   display: flex;
-  justify-content: space-around;
   align-items: center;
+  justify-content: flex-end;
+  flex: 3;
 }
-
 </style>

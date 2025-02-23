@@ -16,10 +16,23 @@ let projStore = useProjStore();
 
 const router = useRouter()
 const handleNodeClick = (data, node) => {
-  // console.log(data,b,c,d)
-  // getPath(node)
-  console.log(node.data.name);
-  router.push({name: node.data.name})
+  if (node.data.name === 'politics') {
+    router.push({
+      name: 'politics',
+      params: {
+        url: encodeURIComponent('https://politiscales.party/')
+      }
+    })
+  } else if (node.data.name === 'mbti') {
+    router.push({
+      name: 'mbti',
+      params: {
+        url: encodeURIComponent('https://www.16personalities.com/ch/%E4%BA%BA%E6%A0%BC%E6%B5%8B%E8%AF%95')
+      }
+    })
+  } else {
+    router.push({name: node.data.name})
+  }
 }
 
 const defaultProps = {

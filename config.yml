@@ -1,0 +1,9 @@
+# gitalk
+# https://github.com/gitalk/gitalk
+gitalk:
+  client_id: 1576e0b6c07e23c3d093
+  client_secret: 55d49473b48ea126c24bb03378795ed02cf19b35
+  repo: blog-comment
+  owner: LesslsMore
+  admin: LesslsMore
+  option:

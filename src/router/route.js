@@ -26,9 +26,28 @@ const todoRoute = [
         },
     },
     {
+        path: '/iframe/:url',
+        name: 'mbti',
         meta: {
-            label: 'mbti political 测试',
+            label: 'mbti 测试',
         },
+        component: () => import('@/components/iframe/IframeView.vue'),
+        props: route => ({ 
+            url: decodeURIComponent(route.params.url),
+            title: route.meta.label 
+        })
+    },
+    {
+        path: '/iframe/:url',
+        name: 'politics',
+        meta: {
+            label: 'politics 测试',
+        },
+        component: () => import('@/components/iframe/IframeView.vue'),
+        props: route => ({ 
+            url: decodeURIComponent(route.params.url),
+            title: route.meta.label 
+        })
     },
     {
         meta: {
@@ -184,6 +203,12 @@ const route = [
         },
         props: true,
         component: () => import('@/components/md/Md.vue')
+    },
+    {
+        path: '/mastodon',
+        name: 'mastodon',
+        props: true,
+        component: () => import('@/components/neodb/Mastodon.vue')
     },
 ];
 
