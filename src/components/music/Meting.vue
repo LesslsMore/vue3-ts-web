@@ -18,6 +18,8 @@
         </el-select> -->
     </div>
     <Metingv :server="server" type="playlist" :id="list_id" fixed="true"></Metingv>
+
+    <!-- <Metingv server="kugou" type="playlist" id="gcid_3zkkpbqhz1gz0be" fixed="true"></Metingv> -->
     <!-- <Metingv v-if="value_t" server="tencent" type="playlist" :id="value_t" fixed="true"></Metingv> -->
 </template>
 
@@ -33,19 +35,12 @@ import Metingv from './Metingv.vue';
 let list_id = ref('')
 
 let uid = ref(import.meta.env.VITE_netease_uid)
-// let value_t = ref('')
-
-// watch(value_n, (val)=>{
-//     console.log(val)
-// })
-
-
-
 
 let server = ref('netease')
+
 let servers = ref([
     'netease',
-    'tencent'
+    'tencent',
 ])
 
 let parms = {

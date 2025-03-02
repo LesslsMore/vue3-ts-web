@@ -1,112 +1,187 @@
 <template>
-  <!-- <div></div> -->
   <el-scrollbar class="scroll-content">
-
-    <div class="hexo-neodb-items" v-for="item, id in itemlist" :key="id">
-      <div class="hexo-neodb-item">
-        <div class="hexo-neodb-picture">
-          <!--                <img :src="item.image" loading="lazy" referrerpolicy="no-referrer">-->
+    <div class="item-list">
+      <el-card v-for="(item, id) in itemlist" :key="id" class="item-card">
+        <div class="item-content">
+          <div class="item-image">
+            <el-image 
+              :src="item.image" 
+              :preview-src-list="[item.image]"
+              fit="cover"
+              loading="lazy"
+              :initial-index="4"
+              @error="handleImageError"
+            >
+              <template #error>
+                <div class="image-error">
+                  <el-icon><picture-filled /></el-icon>
+                </div>
+              </template>
+            </el-image>
+          </div>
+          <div class="item-info">
+            <h3 class="item-title">
+              <el-link :href="item.alt" target="_blank" type="primary">{{ item.title }}</el-link>
+            </h3>
+            <p class="item-meta">{{ item.meta }}</p>
+            <div class="rating-container">
+              <el-rate
+                v-model="item.rating"
+                disabled
+                allow-half
+                show-score
+                text-color="#ff9900"
+                :max="5"
+                :model-value="item.rating / 2"
+              >
+              </el-rate>
+              <span class="created-time">{{ item.created_time }}</span>
+            </div>
+            <p class="item-comment">{{ item.comment }}</p>
+          </div>
         </div>
-        <div class="hexo-neodb-info">
-          <div class="hexo-neodb-title"><a :href="item.alt" target="_blank">{{ item.title }}</a></div>
-          <div class="hexo-neodb-meta" style="-webkit-line-clamp: 4">{{ item.meta }}</div>
-          <div class="hexo-neodb-rating">{{ item.rating }}</div>
-          <div class="hexo-neodb-comment">{{ item.comment }}</div>
-        </div>
-      </div>
+      </el-card>
     </div>
 
-    <el-pagination v-model:current-page="currentPage" v-model:page-size="pageSize"
-                   :page-sizes="[10, 20, 50, 100, 200, 500, 1000]" :small="small" :disabled="disabled"
-                   :background="background"
-                   layout="total, sizes, prev, pager, next, jumper" :total="total"/>
+    <el-pagination
+      :current-page="currentPage"
+      :page-size="pageSize"
+      :small="small"
+      :disabled="disabled || loading"
+      :background="background"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="total"
+      @update:current-page="page => emit('update:currentPage', page)"
+      @update:page-size="size => emit('update:pageSize', size)"
+      class="pagination"
+      :pager-count="7"
+      prev-text="上一页"
+      next-text="下一页"
+      :page-sizes="[20,]"
+      size-change-text="条/页"
+      jump-text="前往"
+    />
   </el-scrollbar>
-
 </template>
 
 <script setup>
-import {ref, computed, watch} from "vue"
-import {nextTick} from "vue";
+import { ref, computed, watch } from "vue"
+import { PictureFilled } from '@element-plus/icons-vue'
 
-let props = defineProps(['items'])
-
-console.log(props.items?.length)
-
-let currentPage = ref(1)
-let pageSize = ref(10)
-const small = ref(false)
-const background = ref(false)
-const disabled = ref(false)
-// let itemlist = ref()
-
-let total = ref(props.items?.length)
-
-console.log(total)
-// console.log(itemlist)
-
-let itemlist = computed(() => {
-  return props.items.slice((currentPage.value - 1) * pageSize.value, (currentPage.value - 1) * pageSize.value + pageSize.value)
+const props = defineProps({
+  items: Array,
+  loading: Boolean,
+  currentPage: {
+    type: Number,
+    required: true
+  },
+  pageSize: {
+    type: Number,
+    required: true
+  },
+  total: {
+    type: Number,
+    required: true
+  }
 })
 
+const scoreTemplate = (score) => {
+  return `评分: ${score * 2} 分`; // 每颗星代表 2 分
+};
+
+const emit = defineEmits(['update:currentPage', 'update:pageSize'])
+
+const small = ref(false)
+const background = ref(true)
+const disabled = ref(false)
+
+const itemlist = computed(() => props.items || [])
+
+const handleImageError = () => {
+  console.warn('Image failed to load')
+}
 </script>
+
 <style scoped>
-.hexo-neodb-items {
-  display: flex;
-  overflow: auto;
-}
-
-
-.hexo-neodb-item {
-  position: relative;
-  clear: both;
-  min-height: 170px;
-  padding: 10px 0;
-  border-bottom: 1px #ddd solid;
-}
-
-@media screen and (max-width: 600px) {
-  .hexo-neodb-item {
-    width: 100%;
-  }
-}
-
-.hexo-neodb-picture {
-  position: absolute;
-  left: 0;
-  top: 10px;
-  width: 100px;
-}
-
-.hexo-neodb-info {
-  padding-left: 120px;
-}
-
-.hexo-neodb-meta {
-  overflow: hidden;
-  display: -webkit-box;
-  font-size: 12px;
-  line-height: 16px;
-  padding-right: 10px;
-  margin-top: 5px;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4
-}
-
-.hexo-neodb-rating {
-  overflow: hidden;
-  display: -webkit-box;
-  font-size: 12px;
-  padding-right: 10px;
-  margin-top: 8px;
-}
-
 .scroll-content {
-  flex: 1; /* 剩余空间自动填充 */
-  overflow-y: auto; /* 滚动 */
+  height: 100%;
+  padding: 20px;
 }
 
-.el-pagination {
+.item-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.item-card {
+  transition: all 0.3s;
+}
+
+.item-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.1);
+}
+
+.item-content {
+  display: flex;
+  gap: 16px;
+}
+
+.item-image {
+  width: 120px;
+  height: 160px;
+  overflow: hidden;
+}
+
+.item-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.item-title {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.item-meta,
+.item-comment {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+.rating-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.created-time {
+  color: #909399;
+  font-size: 14px;
+}
+.image-error {
   display: flex;
   justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background: #f5f7fa;
+  color: #909399;
+  font-size: 24px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 </style>

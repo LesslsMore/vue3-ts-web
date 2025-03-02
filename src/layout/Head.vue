@@ -24,25 +24,78 @@
 <script setup name="Head">
 import useProjStore from '@/stores/proj';
 import { useLayoutStore } from '@/stores/layout';
-import { ref } from "vue";
+import { ref, onBeforeMount } from "vue";
 import router from "@/router";
 import {todoRoute, doingRoute} from "@/router/route.js";
 import RecursiveMenu from '@/components/common/RecursiveMenu.vue';
 
 let projStore = useProjStore();
 const layoutStore = useLayoutStore();
-const activeIndex = ref('2');
+const activeIndex = ref('md');
+const leftMenuItems = ref([]);
 
-const leftMenuItems = [
+// 递归转换路由为菜单项
+function convertRouteToMenuItem(route) {
+  // 如果只有 meta.label，创建一个禁用的菜单项
+  if (!route.name && route.meta?.label) {
+    return {
+      index: route.meta.label,
+      title: route.meta.label,
+      icon: route.meta?.icon || '',
+      disabled: true
+    };
+  }
+
+  // 如果没有 name 且没有 meta.label，跳过该路由
+  if (!route.name && !route.meta?.label) {
+    return null;
+  }
+
+  const menuItem = {
+    index: route.name,
+    title: route.meta?.label || route.name,
+    icon: route.meta?.icon || ''
+  };
+
+  // 递归处理子路由
+  if (route.children && route.children.length > 0) {
+    const children = route.children
+      .map(child => convertRouteToMenuItem(child))
+      .filter(item => item !== null);
+    if (children.length > 0) {
+      menuItem.children = children;
+    }
+  }
+
+  return menuItem;
+}
+
+onBeforeMount(() => {
+  // 初始化状态
+  projStore.proj = [];
+  layoutStore.setShowToc(true);
+  
+  // 使用递归函数转换路由
+  const todoMenuItems = todoRoute
+    .map(route => convertRouteToMenuItem(route))
+    .filter(item => item !== null);
+  const doingMenuItems = doingRoute
+    .map(route => convertRouteToMenuItem(route))
+    .filter(item => item !== null);
+  
+  // 初始化左侧菜单项
+  leftMenuItems.value = [
   {
     index: 'todo',
     title: 'todo',
-    icon: 'WarningFilled'
+    icon: 'WarningFilled',
+    children: todoMenuItems
   },
   {
     index: 'doing',
     title: 'doing',
-    icon: 'QuestionFilled'
+    icon: 'QuestionFilled',
+    children: doingMenuItems
   },
   {
     index: 'done',
@@ -54,7 +107,8 @@ const leftMenuItems = [
     title: '文章',
     icon: 'Document'
   }
-];
+  ];
+});
 
 const rightMenuItems = [
   {
@@ -76,16 +130,6 @@ const rightMenuItems = [
         index: 'Music',
         title: 'Music',
         icon: 'Headset',
-      //   children: [
-      // {
-      //   index: 'Music',
-      //   title: 'Music',
-      //   icon: 'Headset'
-      // }      ,{
-      //   index: 'Movie',
-      //   title: 'Movie',
-      //   icon: 'Film'
-      // }]
       },
       {
         index: 'Movie',
@@ -123,21 +167,24 @@ const handleSelect = (key, keyPath) => {
   } else if (key === "doing") {
     projStore.proj = doingRoute
     layoutStore.setShowToc(false)
-  } else if (key === 'mastodon') {
-    router.push({name: key})
-    layoutStore.setShowToc(false)
   } else if (key === 'md') {
     projStore.proj = []
     layoutStore.setShowToc(true)
+  } else if (key === 'mastodon') {
+    router.push({name: key})
+    layoutStore.setShowToc(false)
   } else if (key === 'home') {
     router.push('/');
+  } else if (['Music', 'Movie', 'Book', 'Game', 'TV'].includes(key)) {
+    router.push({
+      path: "/list",
+      query: { type: key },
+    });
   } else if (key === 'about') {
     const nodeData = {
       name: 'README.md',
       download_url: 'https://raw.githubusercontent.com/LesslsMore/lesslsmore/refs/heads/main/README.md'
     }
-
-    // router.push('/about');
 
     router.push({
       name: 'md',
@@ -148,16 +195,23 @@ const handleSelect = (key, keyPath) => {
     });
     
     layoutStore.setShowToc(true)
-  } else if (['Music', 'Movie', 'Book', 'Game', 'TV'].includes(key)) {
+  } else if (key === 'politics') {
     router.push({
-      path: "/list",
-      query: { type: key },
-    });
-  } 
-  // else {
-  //   projStore.proj = []
-  //   layoutStore.setShowToc(false)
-  // }
+      name: 'politics',
+      params: {
+        url: encodeURIComponent('https://politiscales.party/')
+      }
+    })
+  } else if (key === 'mbti') {
+    router.push({
+      name: 'mbti',
+      params: {
+        url: encodeURIComponent('https://www.16personalities.com/ch/%E4%BA%BA%E6%A0%BC%E6%B5%8B%E8%AF%95')
+      }
+    })
+  } else {
+    router.push({name: key})
+  }
 }
 </script>
 

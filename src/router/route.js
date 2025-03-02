@@ -103,20 +103,26 @@ const doingRoute = [ //一个一个的路由规则
         path: '/neodb',
         name: 'neodb',
         meta: {
-            label: 'neodb json 导出',
+            label: 'neodb',
         },
-        component: () => import('@/components/neodb/Neodb.vue'),
         children: [
-
+            {
+                path: '/neodb/setting',
+                name: '/neodb/setting',
+                meta: {
+                    label: 'neodb json 导出',
+                },
+                component: () => import('@/components/neodb/Neodb.vue'),
+            },
+            {
+                path: '/neodb/tabs',
+                name: '/neodb/tabs',
+                meta: {
+                    label: 'neodb json 显示',
+                },
+                component: () => import('@/components/neodb/Tabs.vue')
+            },
         ]
-    },
-    {
-        path: '/tabs',
-        name: 'neodb-tabs',
-        meta: {
-            label: 'neodb json 显示',
-        },
-        component: () => import('@/components/neodb/Tabs.vue')
     },
     {
         path: '/bili',
@@ -132,8 +138,24 @@ const doingRoute = [ //一个一个的路由规则
                 meta: {
                     label: 'mongo',
                 },
-                component: () => import('@/components/Mongo.vue')
-            }
+                component: () => import('@/components/bili/Mongo.vue')
+            },
+            {
+                path: '/indexed',
+                name: 'indexed',
+                meta: {
+                    label: 'indexed',
+                },
+                component: () => import('@/components/bili/Indexed.vue')
+            },
+            {
+                path: '/storage',
+                name: 'storage',
+                meta: {
+                    label: 'storage',
+                },
+                component: () => import('@/components/bili/Storage.vue')
+            },
         ]
     },
     {
@@ -163,29 +185,37 @@ const doingRoute = [ //一个一个的路由规则
     },
     {
         path: '/live2d',
-        name: 'live2d',
+        name: '/live2d',
         meta: {
-            label: 'live2d 模型加载',
+            label: 'live2d',
         },
-        component: () => import('@/components/live2d/Live2d.vue')
+        children: [
+            {
+                path: '/live2d1',
+                name: '/live2d1',
+                meta: {
+                    label: 'live2d 模型加载 1',
+                },
+                component: () => import('@/components/live2d/Live2d.vue')
+            },
+            {
+                path: '/live2d2',
+                name: '/live2d2',
+                meta: {
+                    label: 'live2d 模型加载 2 ',
+                },
+                component: () => import('@/components/live2d/Live2d2.vue')
+            },
+            {
+                path: '/live2d3',
+                name: '/live2d3',
+                meta: {
+                    label: 'live2d 模型加载 3',
+                },
+                component: () => import('@/components/live2d/Live2d3.vue')
+            },
+        ]
     },
-    {
-        path: '/live2d2',
-        name: 'live2d2',
-        meta: {
-            label: 'live2d 模型加载',
-        },
-        component: () => import('@/components/live2d/Live2d2.vue')
-    },
-    {
-        path: '/live2d3',
-        name: 'live2d3',
-        meta: {
-            label: 'live2d 模型加载',
-        },
-        component: () => import('@/components/live2d/Live2d3.vue')
-    },
-
 ]
 
 const route = [
