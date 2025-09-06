@@ -209,7 +209,11 @@ const handleSelect = (key, keyPath) => {
         url: encodeURIComponent('https://www.16personalities.com/ch/%E4%BA%BA%E6%A0%BC%E6%B5%8B%E8%AF%95')
       }
     })
-  } else {
+  } else if (key === 'bili') { // Add this condition for bili page navigation
+    // window.location.href = '/page/bili/index.html';
+    window.open('/page/bili/index.html', '_blank');
+  } 
+  else {
     router.push({name: key})
   }
 }

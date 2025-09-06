@@ -130,41 +130,41 @@ const doingRoute = [ //一个一个的路由规则
         meta: {
             label: 'bili 分段视频搜索',
         },
-        // component: () => import('@/components/bili/App.vue'),
-        children: [
-            {
-                path: '/mongo',
-                name: 'mongo',
-                meta: {
-                    label: 'mongo',
-                },
-                component: () => import('@/components/bili/Mongo.vue')
-            },
-            {
-                path: '/indexed',
-                name: 'indexed',
-                meta: {
-                    label: 'indexed',
-                },
-                component: () => import('@/components/bili/Indexed.vue')
-            },
-            {
-                path: '/storage',
-                name: 'storage',
-                meta: {
-                    label: 'storage',
-                },
-                component: () => import('@/components/bili/Storage.vue')
-            },
-        ]
+        // component: () => import('../../page/bili/App.vue'),
+        // children: [
+        //     {
+        //         path: '/mongo',
+        //         name: 'mongo',
+        //         meta: {
+        //             label: 'mongo',
+        //         },
+        //         component: () => import('@/components/bili/Mongo.vue')
+        //     },
+        //     {
+        //         path: '/indexed',
+        //         name: 'indexed',
+        //         meta: {
+        //             label: 'indexed',
+        //         },
+        //         component: () => import('@/components/bili/Indexed.vue')
+        //     },
+        //     {
+        //         path: '/storage',
+        //         name: 'storage',
+        //         meta: {
+        //             label: 'storage',
+        //         },
+        //         component: () => import('@/components/bili/Storage.vue')
+        //     },
+        // ]
     },
     {
-        path: '/swiper',
-        name: 'swiper',
+        path: '/rank',
+        name: 'rank',
         meta: {
-            label: 'swiper',
+            label: 'rank',
         },
-        component: () => import('@/components/neodb/swiper.vue')
+        component: () => import('@/components/rank/swiper.vue')
     },
     {
         path: '/md/test',
@@ -191,28 +191,20 @@ const doingRoute = [ //一个一个的路由规则
         },
         children: [
             {
-                path: '/live2d1',
-                name: '/live2d1',
+                path: '/oh-my-live2d',
+                name: '/oh-my-live2d',
                 meta: {
-                    label: 'live2d 模型加载 1',
+                    label: 'oh-my-live2d',
                 },
-                component: () => import('@/components/live2d/Live2d.vue')
+                component: () => import('@/components/live2d/oh-my-live2d.vue')
             },
             {
-                path: '/live2d2',
-                name: '/live2d2',
+                path: '/oh-my-live2d-select',
+                name: '/oh-my-live2d-select',
                 meta: {
-                    label: 'live2d 模型加载 2 ',
+                    label: 'oh-my-live2d-select',
                 },
-                component: () => import('@/components/live2d/Live2d2.vue')
-            },
-            {
-                path: '/live2d3',
-                name: '/live2d3',
-                meta: {
-                    label: 'live2d 模型加载 3',
-                },
-                component: () => import('@/components/live2d/Live2d3.vue')
+                component: () => import('@/components/live2d/oh-my-live2d-select.vue')
             },
         ]
     },

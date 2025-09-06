@@ -36,3 +36,6 @@ coverage
 /public/
 /scripts/
 /script/
+
+.env.development
+.env.production

@@ -1,9 +1,9 @@
 <template>
   <el-upload
       multiple
-      action=""
+      :auto-upload="false"
       accept=".json"
-      :on-success="import_json_bvids"
+      :on-change="import_json_bvids"
       :show-file-list="false"
   >
     <el-button :icon="Upload" type="primary">上传 bvids json</el-button>
@@ -11,9 +11,9 @@
 
   <el-upload
       multiple
-      action=""
+      :auto-upload="false"
       accept=".json"
-      :on-success="import_json_pages"
+      :on-change="import_json_pages"
       :show-file-list="false"
   >
     <el-button :icon="Upload" type="primary">上传 pages json</el-button>
@@ -23,33 +23,24 @@
   <el-button @click="vlist2bvids">vlist2bvids</el-button>
   <el-button @click="bvids2cids">bvids2cids</el-button>
 
-  <el-upload
-      multiple
-      action=""
-      accept=".json"
-      :on-success="import_db"
-      :show-file-list="false"
-  >
-    <el-button :icon="Upload" type="primary">import_db</el-button>
-  </el-upload>
-  <el-button :icon="Download" @click="export_db">export_db</el-button>
+
 
   <el-upload
-      action=""
+      :auto-upload="false"
       accept=".xlsx, .xls"
-      :on-success="import_excel"
+      :on-change="import_excel"
       :show-file-list="false"
   >
     <el-button :icon="Upload" type="primary">import_excel</el-button>
   </el-upload>
   <el-button :icon="Download" @click="export_excel()">export_excel</el-button>
 
-
+  <indexeddb/>
 </template>
 
 <script setup>
 import {Delete, Edit, Search, Refresh, Share, Upload, Download} from '@element-plus/icons-vue'
-import {export_db, import_db} from "@/utils/db/db.js";
+import indexeddb from "@/components/common/indexeddb.vue"
 import {export_excel, import_excel} from "@/utils/db/excel.js";
 import {bvids2cids, import_json_bvids, import_json_pages, pages2vlist, vlist2bvids} from "@/utils/db/db_bili.js";
 </script>

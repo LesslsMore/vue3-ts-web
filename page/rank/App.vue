@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import swiper from "@/components/neodb/swiperVideo.vue"
+import swiper from "@/components/rank/swiperVideo.vue"
 </script>
 
 <style>

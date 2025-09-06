@@ -32,6 +32,7 @@ let data = ref([])
 
 let mods = getRootNodes()
 data.value = mods
+
 const props = {
   value: 'id',
   label: 'name',
@@ -92,8 +93,8 @@ function getTreeNodePath(TreeNode, path) {
   }
 }
 
-// const url = 'https://cdn.jsdelivr.net/gh';
-const url = 'http://localhost:5173/api'
+const url = 'https://cdn.jsdelivr.net/gh';
+// const url = 'http://localhost:5173/api'
 
 let server_url = ref('')
 
@@ -158,32 +159,4 @@ function get() {
 //     {
 //       path: 'https://cdn.jsdelivr.net/gh/Eikanya/Live2d-model/碧蓝航线%20Azue%20Lane/Azue%20Lane(JP)/huonululu_3/huonululu_3.model3.json'
 //     }
-
-
-
-
-const cubism2Model =
-  "https://cdn.jsdelivr.net/gh/guansss/pixi-live2d-display/test/assets/shizuku/shizuku.model.json";
-const cubism4Model =
-  "https://cdn.jsdelivr.net/gh/guansss/pixi-live2d-display/test/assets/haru/haru_greeter_t03.model3.json";
-
-(async function main() {
-  const app = new PIXI.Application({
-    view: document.getElementById("canvas"),
-    autoStart: true,
-    resizeTo: window
-  });
-
-  const model2 = await PIXI.live2d.Live2DModel.from(cubism2Model);
-  const model4 = await PIXI.live2d.Live2DModel.from(cubism4Model);
-
-  app.stage.addChild(model2);
-  app.stage.addChild(model4);
-
-  model2.scale.set(0.3);
-  model4.scale.set(0.25);
-
-  model4.x = 300;
-})();
-
 </script>

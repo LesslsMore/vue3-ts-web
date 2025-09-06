@@ -77,7 +77,7 @@ let opt = ref(
 const modules = [Autoplay];
 
 function openPage() {
-  window.open('page/index.html', '_blank');
+  window.open('page/rank/index.html', '_blank');
 }
 
 import {Download, Upload} from "@element-plus/icons-vue";
@@ -192,7 +192,7 @@ function get_hupu_data(hupu_items) {
         img: image[0],
         rate: scoreAvg,
         vote: summedScorePersonCount,
-        quote: hottestComments.length > 0 ? hottestComments[0] : '',
+        quote: Array.isArray(hottestComments) && hottestComments.length > 0 ? hottestComments[0] : '',
       })
     }
   }

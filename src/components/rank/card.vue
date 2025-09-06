@@ -1,11 +1,11 @@
 <template>
   <div class="card-container">
-    <div class="card-rank">No. {{ item.num }}</div>
+    <div class="card-rank">No. {{ len - idx }}</div>
     <!--        <div class="card-rank-bar"></div>-->
 
     <div class="card-image-container">
-      <img :src="'../img/' + item.num + '.jpg'" loading="lazy" referrerpolicy="no-referrer"/>
-<!--      <img :src="item.img" loading="lazy" referrerpolicy="no-referrer"/>-->
+      <!-- <img :src="'../img/' + item.num + '.jpg'" loading="lazy" referrerpolicy="no-referrer"/> -->
+     <img :src="item.img" loading="lazy" referrerpolicy="no-referrer"/>
     </div>
     <div class="card-content">
       <span class="card-title">{{ item.title }}</span>
@@ -32,7 +32,7 @@
 <script setup>
 
 import '@fortawesome/fontawesome-free/css/all.css';
-defineProps(['item'])
+defineProps(['item', 'len', 'idx'])
 
 function convertToStars(score) {
   const stars = Math.round(score) / 2;

@@ -16,30 +16,6 @@ categories.forEach(category => {
 
 db.version(1).stores(stores)
 
-// 导出 indexeddb 数据
-async function export_db() {
-    console.log('export_db:')
-    console.log(new Date())
-    let databases = await Dexie.getDatabaseNames()
-    console.log(databases)
 
-    const database = 'neodb'
 
-    console.log(database)
-    const blob = await exportDB(db);
-    saveAs(blob, `IndexedDB_${database}.json`);
-
-    console.log(new Date())
-}
-
-// 导入 indexeddb 数据
-async function import_db(file) {
-    console.log('import_db:')
-    console.log(new Date())
-    console.log(file)
-    const blob = new Blob([file.raw], { type: file.raw.type });
-    await importDB(blob);
-    console.log(new Date())
-}
-
-export {export_db, import_db, categories, db}
+export {categories, db}

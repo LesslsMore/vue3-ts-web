@@ -25,7 +25,7 @@ import {ref, onMounted, onUnmounted, computed} from 'vue';
 import Swiper from 'swiper';
 import 'swiper/swiper-bundle.css';
 import {Autoplay} from "swiper/modules";
-import Card from "@/components/neodb/card.vue";
+import Card from "@/components/rank/card.vue";
 import {Upload} from "@element-plus/icons-vue";
 
 const swiperInstance = ref(null);
